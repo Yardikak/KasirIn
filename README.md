@@ -20,15 +20,18 @@ This is a Laravel 11 project, configured with Laravel Breeze, Livewire, and Spat
    cp .env.example .env
 
 4. Generate the application key:
+   /terminal/
    php artisan key:generate
 
-5. Run migrations:
+6. Run migrations:
+   /terminal/
    php artisan migrate
 
-6. Serve the application:
+7. Serve the application:
+   /terminal/
    php artisan serve
 
-7. Verification in GitHub
+8. Verification in GitHub
   Buka repository GitHub Anda dan pastikan semua file proyek sudah diunggah dengan benar.
 
 **Jika ada masalah atau butuh bantuan lebih lanjut, jangan ragu untuk bertanya!**
