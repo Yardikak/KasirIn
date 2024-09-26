@@ -1,5 +1,5 @@
 # KasirIn
-Website Application for managing everything on restaurant, which  in payment, inventory, reservation, etc.
+Website Application for managing everything on restaurant, which  in payment, inventory, reservation, order, etc.
 
 # Technologies
 
