@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ActivationController extends Controller
 {
     public function show()
     {
-        return view('auth.activation'); // Buat view form untuk memasukkan OTP
+        return view('auth.activation');
     }
 
     public function activate(Request $request)
@@ -25,9 +26,11 @@ class ActivationController extends Controller
         if ($user && $user->activation_otp == $request->otp && now()->lessThanOrEqualTo($user->otp_expires_at)) {
             $user->update([
                 'is_active' => true,
-                'activation_otp' => null, // Hapus OTP setelah aktivasi
+                'activation_otp' => null,
                 'otp_expires_at' => null,
             ]);
+
+            Auth::login($user);
 
             return redirect()->route('login')->with('message', 'Akun Anda telah aktif. Silakan login.');
         }

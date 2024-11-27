@@ -34,6 +34,11 @@ new #[Layout('layouts.guest')] class extends Component
 
         session()->flash('status', __($status));
     }
+    public function redirectToOtp()
+    {
+        return redirect()->route('google2fa.setup');
+    }
+
 }; ?>
 
 <div>
@@ -54,7 +59,9 @@ new #[Layout('layouts.guest')] class extends Component
 
         <div class="flex items-center justify-end mt-4">
             <x-primary-button>
-                {{ __('Email Password Reset Link') }}
+                <a wire:click="redirectToOtp">
+                    {{ __('Email Password Reset Link') }}
+                </a>
             </x-primary-button>
         </div>
     </form>

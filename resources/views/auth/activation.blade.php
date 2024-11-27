@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400 text-center">
         Masukkan kode OTP yang telah kami kirimkan ke email Anda untuk mengaktifkan akun.
     </div>
 
@@ -8,8 +8,7 @@
             {{ session('message') }}
         </div>
     @endif
-
-    <form method="POST" action="{{ route('activation.store') }}">
+    <form method="POST" action="{{ route('google2fa.verify') }}">
         @csrf
 
         <!-- Email Input -->
