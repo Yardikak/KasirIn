@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('customer_fullname', 255)->nullable();
             $table->enum('customer_gender', ['Male', 'Female']);
             $table->string('customer_email', 255)->unique();
-            $table->integer('customer_phone');
+            $table->string('customer_phone');
             $table->date('customer_birth');
             $table->enum('customer_status', ['Active', 'Inactive']);
             $table->timestamps();
