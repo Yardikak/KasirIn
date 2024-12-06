@@ -20,6 +20,7 @@ Route::view('profile', 'profile')
 
     Route::middleware('auth')->resource('/menus', \App\Http\Controllers\MenuController::class);
     Route::middleware('auth')->resource('/customers', \App\Http\Controllers\CustomerController::class);
+    Route::middleware('auth')->resource('/categories', \App\Http\Controllers\CategoryController::class);
 
 Route::get('/register', function () {
     return view('auth.register');
