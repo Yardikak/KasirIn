@@ -15,18 +15,19 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
     
-Route::get('/register', function () {
-    return view('auth.register');
-})->middleware('guest')->name('register');
+    Route::get('/register', function () {
+        return view('auth.register');
+    })->middleware('guest')->name('register');
     
-
-Route::middleware('auth')->group(function () {
-    Route::get('google2fa/enable', [Google2FAController::class, 'enableGoogle2fa'])->name('google2fa.enable');
-    Route::post('google2fa/verify', [Google2FAController::class, 'verifyGoogle2fa'])->name('google2fa.verify');
-});
-
-Route::middleware('auth')->resource('/menus', MenuController::class);
-Route::middleware('auth')->resource('/customers', CustomerController::class);
+    
+    Route::middleware('auth')->group(function () {
+        Route::get('google2fa/enable', [Google2FAController::class, 'enableGoogle2fa'])->name('google2fa.enable');
+        Route::post('google2fa/verify', [Google2FAController::class, 'verifyGoogle2fa'])->name('google2fa.verify');
+    });
+    
+    Route::middleware('auth')->resource('/menus', MenuController::class);
+    Route::middleware('auth')->resource('/customers', CustomerController::class);
+    Route::middleware('auth')->resource('/categories', \App\Http\Controllers\CategoryController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
