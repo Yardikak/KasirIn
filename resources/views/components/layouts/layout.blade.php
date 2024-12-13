@@ -11,11 +11,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'KasirIn') }}</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/theme/img/favicon/favicon.ico') }}" />
-
+    <link rel="stylesheet" href="{{ asset('assets/theme/vendor/fonts/boxicons.css') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/theme/img/favicon/logo-kasirin-pendek.ico') }}" />
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,26 +49,17 @@
     @livewireStyles
 </head>
 <body class="font-sans antialiased">
-    
-    <div class="layout-wrapper layout-content flex min-h-screen bg-gray-100">
-        <!-- Sidebar -->
-            <div class="offcanvas offcanvas-start offcanvas-lg" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-                <div class="offcanvas-body">
-                    <x-ui-sidebar></x-ui-sidebar>
-                </div>
-            </div>
-
-        <!-- Main Content -->
+    <div class="layout-wrapper layout-content flex min-h-screen bg-gray-100">        
         <div class="flex-1 flex flex-col">
-        <!-- Navbar -->
-        <x-ui-navbar></x-ui-navbar>
-        
-            <!-- Page Content -->
+            <!-- Navbar -->
+            <livewire:layout.navigation />
+            
+            <!-- Main Content -->
             <main class="flex-1 p-6">
                 {{ $slot }}
             </main>
 
-            <x-ui-footer></x-ui-footer>
+            <livewire:components.ui-footer />
         </div>
     </div>
     <div class="layout-overlay layout-menu-toggle"></div>

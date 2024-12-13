@@ -8,6 +8,11 @@
             {{ session('message') }}
         </div>
     @endif
+    <div class="text-center">
+        <p>Scan QR Code ini menggunakan aplikasi Google Authenticator Anda:</p>
+        <img src="https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl={{ urlencode($qrCodeUrl) }}" alt="QR Code">
+        {!! QrCode::size(200)->generate($qrCodeUrl) !!}
+    </div>
     <form method="POST" action="{{ route('google2fa.verify') }}">
         @csrf
 
@@ -20,9 +25,13 @@
 
         <!-- OTP Input -->
         <div class="mt-4">
-            <x-input-label for="otp" :value="__('Kode OTP')" />
-            <x-text-input id="otp" class="block mt-1 w-full" type="text" name="otp" value="{{ old('otp') }}" required />
-            <x-input-error :messages="$errors->get('otp')" class="mt-2" />
+            <x-input-label for="secretKey" :value="__('Kode OTP')" />
+            <x-text-input id="secretKey" class="block mt-1 w-full" type="text" name="secretKey" value="{{ old('secretKey') }}" required />
+            <x-input-error :messages="$errors->get('secretKey')" class="mt-2" />
+
+            @error('secretKey')
+                <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="flex items-center justify-end mt-4">

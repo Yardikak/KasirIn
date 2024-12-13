@@ -34,35 +34,42 @@ new #[Layout('layouts.guest')] class extends Component
 
         session()->flash('status', __($status));
     }
-    public function redirectToOtp()
-    {
-        return redirect()->route('google2fa.setup');
-    }
 
 }; ?>
 
 <div>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+    <div class="d-flex justify-content-center align-items-center vh-100">
+        <div class="container px-4 py-5 text-center text-lg-start">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-6 col-md-8 mx-auto position-relative">
+                    <!-- Radius Shapes -->
+                    <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+                    <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+
+                    <!-- Form Card -->
+                    <div class="card bg-glass">
+                        <div class="card-body px-4 py-5 px-md-5">
+                            <div class="mb-4 text-sm text-gray-600">
+                                {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+                            </div>
+                            <x-auth-session-status class="mb-4" :status="session('status')" />
+                            <form wire:submit="sendPasswordResetLink">
+                                <!-- Email Address -->
+                                <div>
+                                    <x-input-label for="email" :value="__('Email')" />
+                                    <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus />
+                                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                </div>
+                                <div class="flex items-center justify-end mt-4">
+                                    <x-primary-button class="ms-4">
+                                        {{ __('Email Password Reset Link') }}
+                                    </x-primary-button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form wire:submit="sendPasswordResetLink">
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                <a wire:click="redirectToOtp">
-                    {{ __('Email Password Reset Link') }}
-                </a>
-            </x-primary-button>
-        </div>
-    </form>
 </div>
