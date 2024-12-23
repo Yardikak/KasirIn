@@ -52,8 +52,8 @@ class MenuController extends Controller
             'product_quantity'      => 'nullable|integer|min:0',
             'product_image'         => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
             'product_status'        => 'required|in:Ready,Not Ready',
-            'category_id.*'         => 'nullable|integer|exists:category,id',
-            'additional_id.*'       => 'nullable|integer|exists:additional,id',
+            'category_id.*'         => 'nullable|integer|exists:categories,id',
+            'additional_id.*'       => 'nullable|integer|exists:additionals,id',
         ]);
 
         // Buat menu
@@ -106,8 +106,8 @@ class MenuController extends Controller
         'product_quantity'      => 'nullable|integer|min:0',
         'product_image'         => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
         'product_status'        => 'required|in:Ready,Not Ready',
-        'category_id.*'         => 'nullable|integer|exists:category,id',
-        'additional_id.*'       => 'nullable|integer|exists:additional,id',
+        'category_id.*'         => 'nullable|integer|exists:categories,id',
+        'additional_id.*'       => 'nullable|integer|exists:additionals,id',
     ]);
 
     // Perbarui menu
