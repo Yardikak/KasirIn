@@ -28,7 +28,7 @@ Route::view('profile', 'profile')
     Route::middleware('auth')->resource('/menus', MenuController::class);
     Route::middleware('auth')->resource('/customers', CustomerController::class);
     Route::middleware('auth')->resource('/categories', \App\Http\Controllers\CategoryController::class);
-
+    Route::middleware('auth')->resource('/additionals', \App\Http\Controllers\AdditionalController::class);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

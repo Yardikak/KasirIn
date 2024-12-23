@@ -38,7 +38,7 @@ class AdditionalController extends Controller
         $validated = $request->validate([
             'additional_name'             => 'required|string|max:100',
             'additional_description'      => 'required|string',
-            'additional_status'           => 'required|in:Ready,Not Ready',
+            'additional_status'           => 'required|in:Active,Inactive',
             'product_id.*'                => 'nullable|integer',
             'variant_id.*'                => 'nullable|integer',
         ]);
@@ -87,7 +87,7 @@ class AdditionalController extends Controller
         $validated = $request->validate([
             'additional_name'             => 'required|string|max:100',
             'additional_description'      => 'required|string',
-            'additional_status'           => 'required|in:Ready,Not Ready',
+            'additional_status'           => 'required|in:Active,Inactive',
             // 'product_id.*'                => 'nullable|integer',
             // 'variant_id.*'                => 'nullable|integer',
         ]);
