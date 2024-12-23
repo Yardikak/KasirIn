@@ -12,9 +12,18 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View   
     {
-        $categories = Category::latest()->paginate(9);
+        $sortOrder = $request->input('sort', 'asc'); // Default to ascending if no sort parameter is provided
+
+        // Validate sort order
+        if (!in_array($sortOrder, ['asc', 'desc'])) {
+            $sortOrder = 'asc';
+        }
+
+        // Get Category with sorting
+        $categories = Category::orderBy('category_name', $sortOrder)->latest()->paginate(10);
+        
         return view('categories.index', compact('categories'));
     }
 
