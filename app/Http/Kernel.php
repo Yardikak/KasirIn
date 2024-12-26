@@ -34,6 +34,7 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
-        'google2fa' => \App\Http\Middleware\Google2FAMiddleware::class,
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'user'  => \App\Http\Middleware\UserMiddleware::class,
     ];
 }

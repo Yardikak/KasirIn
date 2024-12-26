@@ -100,14 +100,11 @@ new #[Layout('layouts.guest')] class extends Component
                         <!-- Or Sign Up with social buttons -->
                         <div class="text-center mb-4 mt-0">
                             <p>or sign in with:</p>
-                            <button type="button" class="btn btn-link btn-floating mx-1">
-                                <a href="https://wa.me/628973036644">
-                                    <i class="fab fa-whatsapp"></i>
-                                </a>
-                            </button>
 
                             <button type="button" class="btn btn-link btn-floating mx-1">
-                                <i class="fab fa-google"></i>
+                                <a href="{{route('socialite.redirect', 'google')}}">
+                                    <i class="fab fa-google"></i>
+                                </a>
                             </button>
 
                             <button type="button" class="btn btn-link btn-floating mx-1">
@@ -115,7 +112,7 @@ new #[Layout('layouts.guest')] class extends Component
                             </button>
 
                             <button type="button" class="btn btn-link btn-floating mx-1">
-                                <a href="https://github.com/Yardikak/KasirIn" target="_blank" class="footer-link fw-bolder">
+                                <a href="{{route('socialite.redirect', 'github')}}">
                                     <i class="fab fa-github"></i>
                                 </a>
                             </button>

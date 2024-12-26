@@ -12,10 +12,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // Daftarkan Google2FA ke Service Container
-        $this->app->singleton('google2fa', function () {
-            return new Google2FA();
-        });
+        //
     }
 
     /**

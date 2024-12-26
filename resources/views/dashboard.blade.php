@@ -16,7 +16,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title text-primary">Selamat {{ auth()->user()->name }}! 🎉</h5>
                                     <p class="mb-4">
-                                        Kamu telah mencapai<span class="fw-bold">72%</span> lebih penjualan hari ini.
+                                        Kamu telah mencapai <span class="fw-bold">72%</span> lebih penjualan hari ini.
                                     </p>
                                     <a href="javascript:;" class="btn btn-sm btn-outline-primary">Laporan</a>
                                 </div>
@@ -115,7 +115,7 @@
                       </div>
                     </div>
                     <div id="growthChart"></div>
-                    <div class="text-center fw-semibold pt-3 mb-2">62% Company Growth</div>
+                    <div class="text-center fw-semibold pt-3 mb-2">62% Kenaikan Restoran</div>
 
                     <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
                       <div class="d-flex">
@@ -124,7 +124,7 @@
                         </div>
                         <div class="d-flex flex-column">
                           <small>2022</small>
-                          <h6 class="mb-0">$32.5k</h6>
+                          <h6 class="mb-0">Rp.7jt</h6>
                         </div>
                       </div>
                       <div class="d-flex">
@@ -132,8 +132,8 @@
                           <span class="badge bg-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
                         </div>
                         <div class="d-flex flex-column">
-                          <small>2021</small>
-                          <h6 class="mb-0">$41.2k</h6>
+                          <small>2024</small>
+                          <h6 class="mb-0">Rp.890jt</h6>
                         </div>
                       </div>
                     </div>
@@ -168,8 +168,8 @@
                           </div>
                         </div>
                       </div>
-                      <span class="d-block mb-1">Payments</span>
-                      <h3 class="card-title text-nowrap mb-2">$2,456</h3>
+                      <span class="fw-semibold d-block mb-1">Pembayaran</span>
+                      <h3 class="card-title text-nowrap mb-2">Rp.2jt</h3>
                       <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -14.82%</small>
                     </div>
                   </div>
@@ -199,8 +199,8 @@
                           </div>
                         </div>
                       </div>
-                      <span class="fw-semibold d-block mb-1">Transactions</span>
-                      <h3 class="card-title mb-2">$14,857</h3>
+                      <span class="fw-semibold d-block mb-1">Transaksi</span>
+                      <h3 class="card-title mb-2">Rp.14jt</h3>
                       <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
                     </div>
                   </div>
@@ -212,13 +212,13 @@
                                     <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
                                         <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                                             <div class="card-title">
-                                                <h5 class="text-nowrap mb-2">Profile Report</h5>
-                                                <span class="badge bg-label-warning rounded-pill">Year 2021</span>
+                                                <h5 class="text-nowrap mb-2">Laporan Kamu</h5>
+                                                <span class="badge bg-label-warning rounded-pill">Tahun 2024</span>
                                             </div>
                                             <div class="mt-sm-auto">
                                                 <small class="text-success text-nowrap fw-semibold">
                                                 <i class="bx bx-chevron-up"></i> 68.2%</small>
-                                                <h3 class="mb-0">$84,686k</h3>
+                                                <h3 class="mb-0">RP.84jt</h3>
                                             </div>
                                         </div>
                                         <div id="profileReportChart"></div>
@@ -235,8 +235,8 @@
                     <div class="card h-100">
                         <div class="card-header d-flex align-items-center justify-content-between pb-0">
                             <div class="card-title mb-0">
-                                <h5 class="m-0 me-2">Order Statistics</h5>
-                                <small class="text-muted">42.82k Total Sales</small>
+                                <h5 class="m-0 me-2">Statistik Pemesanan</h5>
+                                <small class="text-muted">42jt Total Penjualan</small>
                             </div>
                             <div class="dropdown">
                                 <button class="btn p-0" type="button" id="orederStatistics" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -253,7 +253,7 @@
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <div class="d-flex flex-column align-items-center gap-1">
                                     <h2 class="mb-2">8,258</h2>
-                                    <span>Total Orders</span>
+                                    <span>Total Pemesanan</span>
                                 </div>
                                 <div id="orderStatisticsChart"></div>
                             </div>
@@ -261,13 +261,13 @@
                             <li class="d-flex mb-4 pb-1">
                                 <div class="avatar flex-shrink-0 me-3">
                                     <span class="avatar-initial rounded bg-label-primary">
-                                        <i class="bx bx-mobile-alt"></i>
+                                        <i class="bx bxs-coffee"></i>
                                     </span>
                                 </div>
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                     <div class="me-2">
-                                        <h6 class="mb-0">Electronic</h6>
-                                        <small class="text-muted">Mobile, Earbuds, TV</small>
+                                        <h6 class="mb-0">Drink</h6>
+                                        <small class="text-muted">Es Teh, STMJ, </small>
                                     </div>
                                     <div class="user-progress">
                                         <small class="fw-semibold">82.5k</small>
@@ -276,12 +276,12 @@
                             </li>
                             <li class="d-flex mb-4 pb-1">
                                 <div class="avatar flex-shrink-0 me-3">
-                                    <span class="avatar-initial rounded bg-label-success"><i class="bx bx-closet"></i></span>
+                                    <span class="avatar-initial rounded bg-label-success"><i class="bx bxs-dish"></i></span>
                                 </div>
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                     <div class="me-2">
-                                        <h6 class="mb-0">Fashion</h6>
-                                        <small class="text-muted">T-shirt, Jeans, Shoes</small>
+                                        <h6 class="mb-0">Food</h6>
+                                        <small class="text-muted">Nasi Goreng, Sate</small>
                                     </div>
                                     <div class="user-progress">
                                         <small class="fw-semibold">23.8k</small>
@@ -351,9 +351,9 @@
                                         
                                     </div>
                                     <div>
-                                        <small class="text-muted d-block">Total Balance</small>
+                                        <small class="text-muted d-block">Total Keuangan</small>
                                             <div class="d-flex align-items-center">
-                                                <h6 class="mb-0 me-1">$459.10</h6>
+                                                <h6 class="mb-0 me-1">Rp.127jt</h6>
                                                 <small class="text-success fw-semibold">
                                                 <i class="bx bx-chevron-up"></i> 42.9% </small>
                                             </div>
@@ -365,8 +365,8 @@
                                             <div id="expensesOfWeek"></div>
                                         </div>
                                         <div>
-                                            <p class="mb-n1 mt-1">Expenses This Week</p>
-                                            <small class="text-muted">$39 less than last week</small>
+                                            <p class="mb-n1 mt-1">Ekspansi minggu ini</p>
+                                            <small class="text-muted">Rp. 500k kurang dari minggu lalu</small>
                                         </div>
                                     </div>
                                 </div>
@@ -380,7 +380,7 @@
                     <div class="col-md-6 col-lg-4 order-2 mb-4">
                         <div class="card h-100">
                             <div class="card-header d-flex align-items-center justify-content-between">
-                                <h5 class="card-title m-0 me-2">Transactions</h5>
+                                <h5 class="card-title m-0 me-2">Transaksi</h5>
                                 <div class="dropdown">
                                     <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="bx bx-dots-vertical-rounded"></i>

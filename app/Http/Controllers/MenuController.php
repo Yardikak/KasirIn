@@ -16,14 +16,12 @@ class MenuController extends Controller
      */
     public function index(Request $request): View
     {
-        $sortOrder = $request->input('sort', 'asc'); // Default to ascending if no sort parameter is provided
+        $sortOrder = $request->input('sort', 'asc');
 
-        // Validate sort order
         if (!in_array($sortOrder, ['asc', 'desc'])) {
             $sortOrder = 'asc';
         }
 
-        // Get menus with sorting
         $menus = Menu::orderBy('product_name', $sortOrder)->latest()->paginate(10);
 
         return view('menus.index', compact('menus'));
@@ -52,20 +50,17 @@ class MenuController extends Controller
             'product_quantity'      => 'nullable|integer|min:0',
             'product_image'         => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
             'product_status'        => 'required|in:Ready,Not Ready',
-            'category_id.*'         => 'nullable|integer|exists:category,id',
-            'additional_id.*'       => 'nullable|integer|exists:additional,id',
+            'category_id.*'         => 'nullable|integer|exists:categories,id',
+            'additional_id.*'       => 'nullable|integer|exists:additionals,id',
         ]);
 
-        // Buat menu
         $menu = Menu::create($validated);
 
-        // Kaitkan kategori yang dipilih dengan menu
         if ($request->has('category_id')) {
             // dd($request->all());
             $menu->categories()->attach($request->input('category_id'));
         }
 
-        // Kaitkan additional yang dipilih dengan menu
         if ($request->has('additional_id')) {
             $menu->additionals()->attach($request->input('additional_id'));
         }
@@ -106,27 +101,24 @@ class MenuController extends Controller
         'product_quantity'      => 'nullable|integer|min:0',
         'product_image'         => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
         'product_status'        => 'required|in:Ready,Not Ready',
-        'category_id.*'         => 'nullable|integer|exists:category,id',
-        'additional_id.*'       => 'nullable|integer|exists:additional,id',
+        'category_id.*'         => 'nullable|integer|exists:categories,id',
+        'additional_id.*'       => 'nullable|integer|exists:additionals,id',
     ]);
 
-    // Perbarui menu
     $menu->update($validated);
 
-    // Kaitkan kategori yang dipilih dengan menu
     $categories = $request->input('category_id', []);
     if (!empty($categories)) {
         $menu->categories()->sync($categories);
     } else {
-        $menu->categories()->detach(); // Hapus pengaitan jika tidak ada kategori yang dipilih
+        $menu->categories()->detach();
     }
 
-    // Kaitkan additional yang dipilih dengan menu
     $additionals = $request->input('additional_id', []);
     if (!empty($additionals)) {
         $menu->additionals()->sync($additionals);
     } else {
-        $menu->additionals()->detach(); // Hapus pengaitan jika tidak ada additional yang dipilih
+        $menu->additionals()->detach();
     }
 
     return redirect()->route('menus.index')->with('success', 'Data berhasil Diperbarui!');

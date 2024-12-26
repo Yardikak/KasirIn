@@ -23,10 +23,9 @@ class AdditionalMenuController extends Controller
      */
     public function show(Additional $additional)
     {
-        $menus = Menu::all(); // Atau sesuai dengan logika pencarian
+        $menus = Menu::all();
         $assignedMenus = $additional->menus->pluck('id')->toArray();
     
-        // Pisahkan menu yang tersedia dan yang sudah terdaftar
         $availableMenus = $menus->filter(function ($menu) use ($assignedMenus) {
             return !in_array($menu->id, $assignedMenus);
         });
@@ -43,24 +42,18 @@ class AdditionalMenuController extends Controller
      */
     public function search(Additional $additional, Request $request)
     {
-        // Ambil string pencarian dari request
         $search = $request->get('search');
         
-        // Buat query untuk menu
         $menus = Menu::query();
         
-        // Jika ada string pencarian, tambahkan filter
         if ($search) {
             $menus->where('product_name', 'like', "%{$search}%");
         }
         
-        // Ambil hasil pencarian
         $menus = $menus->get();
         
-        // Ambil daftar ID menu yang sudah terdaftar di additional
         $assignedMenus = $additional->menus->pluck('id')->toArray();
         
-        // Pisahkan menu yang tersedia dan yang sudah terdaftar
         $availableMenus = $menus->filter(function ($menu) use ($assignedMenus) {
             return !in_array($menu->id, $assignedMenus);
         });
@@ -69,7 +62,6 @@ class AdditionalMenuController extends Controller
             return in_array($menu->id, $assignedMenus);
         });
         
-        // Kirim data ke view
         return view('additional_menus.show', compact('additional', 'availableMenus', 'assignedMenusList'));
     } 
 

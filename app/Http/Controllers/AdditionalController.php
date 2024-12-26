@@ -45,9 +45,7 @@ class AdditionalController extends Controller
 
         $additional= Additional::create($validated);
 
-        // Kaitkan kategori yang dipilih dengan menu
         if ($request->has('product_id')) {
-            // dd($request->all());
             $additional->menus()->attach($request->input('product_id'));
         }
 
@@ -63,7 +61,7 @@ class AdditionalController extends Controller
      */
     public function show(Additional $additional): View
     {
-        $additional->load('menus', 'variants'); // Mengambil data variant yang terasosiasi
+        $additional->load('menus', 'variants');
         return view('additionals.show', compact('additional'));
     }
 
@@ -73,7 +71,7 @@ class AdditionalController extends Controller
     public function edit(Additional $additional): View
     {
         $menus = Menu::all();
-        $variants = Variant::all(); // Fetch all variants
+        $variants = Variant::all();
         $selectedMenus = $additional->menus->pluck('id')->toArray();
         // $selectedVariants = $additional->variants->pluck('id')->toArray();
         return view('additionals.edit', compact('additional', 'menus', 'variants', 'selectedMenus'));

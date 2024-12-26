@@ -17,10 +17,9 @@ class CategoryMenuController extends Controller
 
     public function show(Category $category)
     {
-        $menus = Menu::all(); // Atau sesuai dengan logika pencarian
+        $menus = Menu::all();
         $assignedMenus = $category->menus->pluck('id')->toArray();
     
-        // Pisahkan menu yang tersedia dan yang sudah terdaftar
         $availableMenus = $menus->filter(function ($menu) use ($assignedMenus) {
             return !in_array($menu->id, $assignedMenus);
         });
@@ -34,24 +33,18 @@ class CategoryMenuController extends Controller
 
     public function search(Category $category, Request $request)
     {
-        // Ambil string pencarian dari request
         $search = $request->get('search');
         
-        // Buat query untuk menu
         $menus = Menu::query();
         
-        // Jika ada string pencarian, tambahkan filter
         if ($search) {
             $menus->where('product_name', 'like', "%{$search}%");
         }
         
-        // Ambil hasil pencarian
         $menus = $menus->get();
         
-        // Ambil daftar ID menu yang sudah terdaftar di kategori
         $assignedMenus = $category->menus->pluck('id')->toArray();
         
-        // Pisahkan menu yang tersedia dan yang sudah terdaftar
         $availableMenus = $menus->filter(function ($menu) use ($assignedMenus) {
             return !in_array($menu->id, $assignedMenus);
         });
@@ -60,7 +53,6 @@ class CategoryMenuController extends Controller
             return in_array($menu->id, $assignedMenus);
         });
         
-        // Kirim data ke view
         return view('category_menus.show', compact('category', 'availableMenus', 'assignedMenusList'));
     }    
 

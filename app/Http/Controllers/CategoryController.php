@@ -79,7 +79,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category): RedirectResponse
     {
-        // Hapus kaitan dengan menu di tabel pivot
         $category->menus()->detach();
         
         $category->delete();

@@ -6,8 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Spatie\Permission\Traits\HasRoles; // Import HasRoles trait
-use PragmaRX\Google2FA\Google2FA;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -22,7 +21,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'google2fa_secret',
     ];
 
     /**
@@ -33,7 +31,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'google2fa_secret',
     ];
 
     /**
@@ -48,26 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    
-    /**
-     * @method bool hasGoogle2faEnabled()
-     * @method string generateGoogle2faSecret()
-     */
-    
-    public function generateGoogle2faSecret()
-    {
-        $google2fa = new Google2FA();
-        $this->google2fa_secret = $google2fa->generateSecretKey();
-        $this->save();
-        
-        dd(get_class_methods($this));
-        return $this->google2fa_secret;
-    }
 
-    public function hasGoogle2faEnabled()
-    {
-        return !is_null($this->google2fa_secret);
+    public function socialite(){
+        return $this->hasMany(Socialite::class);
     }
-
 
 }

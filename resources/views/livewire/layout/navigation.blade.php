@@ -25,13 +25,42 @@ new class extends Component
                 <x-application-logo></x-application-logo>
             </a>
             <div class="hidden sm:flex sm:items-center sm:space-x-8">
+                <x-nav-link :href="route('orders.index')" wire:navigate :active="request()->routeIs('orders')">
+                    <i class="bx bx-restaurant"></i>
+                    {{ __('Cashier') }}
+                </x-nav-link>
+                
                 <x-nav-link :href="route('menus.index')" wire:navigate :active="request()->routeIs('menus')">
+                    <i class="bx bx-dish"></i>
                     {{ __('Menu') }}
                 </x-nav-link>
 
+                <x-nav-link :href="route('categories.index')" wire:navigate :active="request()->routeIs('categories')">
+                    <i class="bx bxs-category"></i>
+                    {{ __('Category') }}
+                </x-nav-link>
+
+                <x-nav-link :href="route('category_menus.index')" wire:navigate :active="request()->routeIs('category_menus')">
+                    <i class="bx bxs-category"></i>
+                    {{ __('Category Menu') }}
+                </x-nav-link>
+
+                <x-nav-link :href="route('additionals.index')" wire:navigate :active="request()->routeIs('additionals')">
+                    <i class="bx bx-cookie"></i>
+                    {{ __('Additional') }}
+                </x-nav-link>
+
                 <x-nav-link :href="route('customers.index')" wire:navigate :active="request()->routeIs('customers')">
+                    <i class="bx bx-id-card"></i>
                     {{ __('Customer') }}
                 </x-nav-link>
+
+                <x-nav-link :href="route('customers.index')" wire:navigate :active="request()->routeIs('tables')">
+                    <i class="bx bx-chair"></i>
+                    {{ __('Table') }}
+                </x-nav-link>
+
+                
             </div>
             <!-- Right Side: Settings Dropdown & Hamburger -->
             <div class="flex items-center ml-auto">

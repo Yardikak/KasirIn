@@ -20,7 +20,7 @@ class MenuSeeder extends Seeder
                 'product_cost' => 50000,
                 'product_price' => 75000,
                 'product_quantity' => 30,
-                'product_image' => 'pizza_margherita.jpg',
+                'product_image' => 'assets/theme/img/menus/pizza-margherita.jpeg',
                 'product_status' => 'Ready'
             ],
             [
@@ -29,7 +29,7 @@ class MenuSeeder extends Seeder
                 'product_cost' => 60000,
                 'product_price' => 90000,
                 'product_quantity' => 20,
-                'product_image' => 'lasagna.jpg',
+                'product_image' => 'assets/theme/img/menus/lasagna.jpeg',
                 'product_status' => 'Ready'
             ],
             [
@@ -38,7 +38,7 @@ class MenuSeeder extends Seeder
                 'product_cost' => 45000,
                 'product_price' => 70000,
                 'product_quantity' => 25,
-                'product_image' => 'risotto.jpg',
+                'product_image' => 'assets/theme/img/menus/risotto.jpeg',
                 'product_status' => 'Ready'
             ],
             [
@@ -47,7 +47,7 @@ class MenuSeeder extends Seeder
                 'product_cost' => 35000,
                 'product_price' => 50000,
                 'product_quantity' => 40,
-                'product_image' => 'tiramisu.jpg',
+                'product_image' => 'assets/theme/img/menus/tiramisu.jpeg',
                 'product_status' => 'Ready'
             ],
             [
@@ -56,7 +56,7 @@ class MenuSeeder extends Seeder
                 'product_cost' => 40000,
                 'product_price' => 60000,
                 'product_quantity' => 35,
-                'product_image' => 'carbonara.jpg',
+                'product_image' => 'assets/theme/img/menus/carbonara.jpeg',
                 'product_status' => 'Ready'
             ],
             // Makanan Khas Jepang
@@ -66,7 +66,7 @@ class MenuSeeder extends Seeder
                 'product_cost' => 50000,
                 'product_price' => 80000,
                 'product_quantity' => 50,
-                'product_image' => 'sushi.jpg',
+                'product_image' => 'assets/theme/img/menus/sushi.jpeg',
                 'product_status' => 'Ready'
             ],
             [
@@ -75,7 +75,7 @@ class MenuSeeder extends Seeder
                 'product_cost' => 40000,
                 'product_price' => 70000,
                 'product_quantity' => 45,
-                'product_image' => 'ramen.jpg',
+                'product_image' => 'assets/theme/img/menus/ramen.jpeg',
                 'product_status' => 'Ready'
             ],
             [
@@ -84,7 +84,7 @@ class MenuSeeder extends Seeder
                 'product_cost' => 30000,
                 'product_price' => 50000,
                 'product_quantity' => 60,
-                'product_image' => 'tempura.jpg',
+                'product_image' => 'assets/theme/img/menus/tempura.jpeg',
                 'product_status' => 'Ready'
             ],
             [
@@ -93,7 +93,7 @@ class MenuSeeder extends Seeder
                 'product_cost' => 45000,
                 'product_price' => 75000,
                 'product_quantity' => 40,
-                'product_image' => 'sashimi.jpg',
+                'product_image' => 'assets/theme/img/menus/sashimi.jpeg',
                 'product_status' => 'Ready'
             ],
             [
@@ -102,7 +102,7 @@ class MenuSeeder extends Seeder
                 'product_cost' => 20000,
                 'product_price' => 40000,
                 'product_quantity' => 70,
-                'product_image' => 'yakitori.jpg',
+                'product_image' => 'assets/theme/img/menus/yakitori.jpeg',
                 'product_status' => 'Ready'
             ],
             // Makanan Khas Indonesia
@@ -112,7 +112,7 @@ class MenuSeeder extends Seeder
                 'product_cost' => 10000,
                 'product_price' => 15000,
                 'product_quantity' => 50,
-                'product_image' => 'nasi_goreng.jpg',
+                'product_image' => 'assets/theme/img/menus/nasi-goreng.jpeg',
                 'product_status' => 'Ready'
             ],
             [
@@ -121,7 +121,7 @@ class MenuSeeder extends Seeder
                 'product_cost' => 30000,
                 'product_price' => 50000,
                 'product_quantity' => 30,
-                'product_image' => 'rendang.jpg',
+                'product_image' => 'assets/theme/img/menus/rendang.jpeg',
                 'product_status' => 'Ready'
             ],
             [
@@ -130,7 +130,7 @@ class MenuSeeder extends Seeder
                 'product_cost' => 15000,
                 'product_price' => 25000,
                 'product_quantity' => 60,
-                'product_image' => 'sate_ayam.jpg',
+                'product_image' => 'assets/theme/img/menus/sate-ayam.jpeg',
                 'product_status' => 'Ready'
             ],
             [
@@ -139,7 +139,7 @@ class MenuSeeder extends Seeder
                 'product_cost' => 12000,
                 'product_price' => 20000,
                 'product_quantity' => 40,
-                'product_image' => 'gado_gado.jpg',
+                'product_image' => 'assets/theme/img/menus/gado-gado.jpeg',
                 'product_status' => 'Ready'
             ],
             [
@@ -148,7 +148,7 @@ class MenuSeeder extends Seeder
                 'product_cost' => 8000,
                 'product_price' => 15000,
                 'product_quantity' => 70,
-                'product_image' => 'bakso.jpg',
+                'product_image' => 'assets/theme/img/menus/bakso.jpeg',
                 'product_status' => 'Ready'
             ],
             // Makanan Khas Chinese

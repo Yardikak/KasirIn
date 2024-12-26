@@ -53,9 +53,9 @@ class AdditionalVariantController extends Controller
         return redirect()->route('additional_variant.index')->with('success', 'Variant successfully unlinked from additional!');
     }
 
-    /**
-     * Get variants related to the selected additional.
-     */
+    // /**
+    //  * Get variants related to the selected additional.
+    //  */
     // public function getVariantsByAdditional(Request $request): JsonResponse
     // {
     //     $additionalId = $request->input('additional_id');

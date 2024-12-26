@@ -53,11 +53,14 @@
                         </select>
                     </div>
 
-                    <div class="form-group mb-4">
+                    <div class="w-full px-2 form-group mb-4">
                         <label for="product_image" class="block text-gray-800 text-sm font-semibold mb-2">Product Image</label>
                         <input type="file" id="product_image" name="product_image" class="form-input bg-white border rounded w-full">
                         @if ($menu->product_image)
-                            <img src="{{ asset('storage/' . $menu->product_image) }}" alt="Product Image" class="mt-4 w-full h-auto rounded">
+                        <div class="mt-4">
+                            <img src="{{ asset($menu->product_image) }}" class="w-full max-w-xs mx-auto h-40 object-cover border border-gray-300 rounded-lg shadow-md" alt="{{ $menu->product_name }}">
+                            <p class="text-center text-gray-600 mt-2 text-sm">Current Image</p>
+                        </div>
                         @endif
                     </div>
 
