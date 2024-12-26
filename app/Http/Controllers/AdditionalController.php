@@ -14,9 +14,18 @@ class AdditionalController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View   
     {
-        $additionals = Additional::latest()->paginate(9);
+        
+        $sortOrder = $request->input('sort', 'asc'); // Default to ascending if no sort parameter is provided
+
+        // Validate sort order
+        if (!in_array($sortOrder, ['asc', 'desc'])) {
+            $sortOrder = 'asc';
+        }
+
+        // Get customers with sorting
+        $additionals = Additional::orderBy('additional_name', $sortOrder)->latest()->paginate(10);
         return view('additionals.index', compact('additionals'));
     }
 
@@ -38,7 +47,7 @@ class AdditionalController extends Controller
         $validated = $request->validate([
             'additional_name'             => 'required|string|max:100',
             'additional_description'      => 'required|string',
-            'additional_status'           => 'required|in:Ready,Not Ready',
+            'additional_status'           => 'required|in:Active,Inactive',
             'product_id.*'                => 'nullable|integer',
             'variant_id.*'                => 'nullable|integer',
         ]);
@@ -85,7 +94,7 @@ class AdditionalController extends Controller
         $validated = $request->validate([
             'additional_name'             => 'required|string|max:100',
             'additional_description'      => 'required|string',
-            'additional_status'           => 'required|in:Ready,Not Ready',
+            'additional_status'           => 'required|in:Active,Inactive',
             // 'product_id.*'                => 'nullable|integer',
             // 'variant_id.*'                => 'nullable|integer',
         ]);

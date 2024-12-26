@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('additional_name', 255);
             $table->text('additional_description')->nullable();
-            $table->enum('additional_status', ['Ready', 'Not Ready'])->default('Ready');
+            $table->enum('additional_status', ['Active', 'Inctive'])->default('Active');
             $table->timestamps();
         });
     }

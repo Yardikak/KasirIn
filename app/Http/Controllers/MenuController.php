@@ -45,7 +45,7 @@ class MenuController extends Controller
         $validated = $request->validate([
             'product_name'          => 'required|string|max:100',
             'product_description'   => 'nullable|string',
-            'product_cost'          => 'required|integer',
+            'product_cost'          => 'required|numeric',
             'product_price'         => 'required|numeric',
             'product_quantity'      => 'nullable|integer|min:0',
             'product_image'         => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
@@ -96,7 +96,7 @@ class MenuController extends Controller
     $validated = $request->validate([
         'product_name'          => 'required|string|max:100',
         'product_description'   => 'nullable|string',
-        'product_cost'          => 'required|integer',
+        'product_cost'          => 'required|numeric',
         'product_price'         => 'required|numeric',
         'product_quantity'      => 'nullable|integer|min:0',
         'product_image'         => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
