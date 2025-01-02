@@ -13,6 +13,17 @@ class Order extends Model
         'order_code',
         'order_note',
         'total_price',
-        'order_status'
+        'order_status',
+        'discount',
+        'tax',
+        'table_id',
+        'customer_id',
     ];
+
+    public function menus()
+    {
+        return $this->belongsToMany(Menu::class, 'menu_orders', 'order_id', 'menu_id')
+                    ->withPivot('order_quantity', 'order_note', 'order_price')
+                    ->withTimestamps();
+    }
 }

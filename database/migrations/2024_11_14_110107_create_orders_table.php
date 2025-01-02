@@ -16,9 +16,11 @@ return new class extends Migration
             $table->string('order_code', 255);
             $table->text('order_note')->nullable();
             $table->decimal('total_price', 12, 2);
+            $table->decimal('discount', 12, 2)->default(0);
+            $table->decimal('tax', 12, 2)->default(0);
             $table->enum('order_status', ['Pending', 'Completed', 'Canceled']);
-            $table->foreignId('table_id')->constrained('tables')->onDelete('cascade');
-            $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
+            $table->foreignId('table_id')->nullable()->constrained('tables')->onDelete('cascade');
+            $table->foreignId('customer_id')->nullable()->constrained('customers')->onDelete('cascade');
             $table->timestamps();
         });
     }

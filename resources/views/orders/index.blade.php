@@ -75,19 +75,5 @@
     <!-- Order Summary (Content) -->
     @livewire('components.order-summary', 'finalPrice')
 
-    <!-- Confirm Button -->
-    @if (count($cart) > 0)
-    <div class="flex justify-end mt-4">
-        <form action="{{ route('orders.store') }}" method="POST">
-            @csrf
-            <input type="hidden" name="order_code" value="{{ $orderCode }}">
-            <input type="hidden" name="cart" value="{{ json_encode(session()->get('cart', [])) }}">
-            <input type="hidden" name="customer_id" value="{{ session('customer')->id ?? '' }}">
-            <button type="submit" class="btn bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4">
-                Confirm Order
-            </button>
-        </form>
-    </div>
-    @endif
     </div>
 </x-layouts.layout>

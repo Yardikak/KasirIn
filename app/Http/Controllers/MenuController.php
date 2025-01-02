@@ -32,8 +32,8 @@ class MenuController extends Controller
      */
     public function create(): View
     {
-        $categories = Category::all(); // Fetch all categories
-        $additionals = Additional::all(); // Fetch all additionals
+        $categories = Category::all();
+        $additionals = Additional::all();
         return view('menus.create', compact('categories', 'additionals'));
     }
 
@@ -57,7 +57,6 @@ class MenuController extends Controller
         $menu = Menu::create($validated);
 
         if ($request->has('category_id')) {
-            // dd($request->all());
             $menu->categories()->attach($request->input('category_id'));
         }
 

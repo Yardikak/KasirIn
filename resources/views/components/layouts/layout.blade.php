@@ -51,6 +51,7 @@
 <body class="font-sans antialiased">
     <div class="layout-wrapper layout-content flex min-h-screen bg-gray-100">        
         <div class="flex-1 flex flex-col">
+            @if(Auth::check())
             <!-- Navbar -->
             <livewire:layout.navigation />
             
@@ -60,6 +61,7 @@
             </main>
 
             <livewire:components.ui-footer />
+            @endif
         </div>
     </div>
     <div class="layout-overlay layout-menu-toggle"></div>

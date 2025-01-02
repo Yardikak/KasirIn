@@ -54,6 +54,15 @@
                     <span class="text-3xl font-extrabold text-gray-800" x-text="parseFloat(finalPrice).toFixed(2)"></span>
                 </div>
             </div>
+            <!-- Confirm Order Button -->
+            <div class="mt-6 flex justify-end">
+                <button 
+                    type="button" 
+                    wire:click="confirmOrder" 
+                    class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg shadow">
+                    Confirm Order
+                </button>
+            </div>
         </div>
         @else
         <div class="bg-red-500 text-white p-6 rounded-xl mt-6 shadow-lg">

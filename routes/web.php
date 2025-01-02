@@ -34,11 +34,11 @@ Route::get('/auth/{provider}/callback', [SocialiteController::class, 'callback']
     Route::middleware('auth')->resource('/menus', MenuController::class);
     Route::middleware('auth')->resource('/categories', CategoryController::class);
     Route::middleware('auth')->resource('/additionals', AdditionalController::class);
-    Route::middleware('auth')->resource('/variants',VariantController::class);
+    Route::middleware('auth')->resource('/variants', VariantController::class);
     Route::middleware('auth')->resource('/customers', CustomerController::class);
 
     Route::middleware('auth')->group(function () {
-        Route::resource('category_menus', CategoryMenuController::class);
+        Route::resource('category_menus', CategoryMenuController::class)->except(['show']);
         Route::get('category_menus/{category}/show', [CategoryMenuController::class, 'show'])->name('category_menus.show');
         Route::get('category_menus/{category}/search', [CategoryMenuController::class, 'search'])->name('category_menus.search');
         Route::post('category_menus/{category}/add/{menu}', [CategoryMenuController::class, 'add'])->name('category_menus.add');
@@ -47,7 +47,7 @@ Route::get('/auth/{provider}/callback', [SocialiteController::class, 'callback']
     Route::middleware('auth')->group(function () {
         Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
         Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
-        Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+        Route::post('/orders/store', [OrderController::class, 'store'])->name('orders.store');
         Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
         Route::post('/orders/add-to-cart', [OrderController::class, 'addToCart'])->name('orders.addToCart');
         Route::post('/orders/remove-from-cart', [OrderController::class, 'removeFromCart'])->name('orders.removeFromCart');

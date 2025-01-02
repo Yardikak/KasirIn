@@ -15,13 +15,15 @@
                 @endif
             </div>
         </div>
+        <!-- Search Bar -->
+        {{-- @livewire('search-menu', 'updateSearch') --}}
     
         @if (session('success'))
             <div class="bg-green-500 text-gray-800 font-semibold p-4 rounded mb-4">
                 {{ session('success') }}
             </div>
         @endif
-    
+
         @if($menus->isEmpty())
             <p class="text-red-800 font-semibold">No menu found.</p>
         @else

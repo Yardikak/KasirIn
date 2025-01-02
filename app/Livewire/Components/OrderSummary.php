@@ -57,4 +57,53 @@ class OrderSummary extends Component
         }
         return $totalPrice;
     }
+
+    public function confirmOrder()
+    {
+        if (empty($this->cart)) {
+            session()->flash('error', 'Your cart is empty. Please add items before confirming the order.');
+            return;
+        }
+
+        $this->calculateFinalPrice();
+
+        $orderCode = session('orderCode');
+
+        $order = \App\Models\Order::create([
+            'order_code' => $orderCode,
+            'total_price' => $this->finalPrice,
+            'discount' => $this->discount,
+            'tax' => $this->tax,
+            'order_status' => 'Pending',
+            'table_id' => null,
+            'customer_id' => null,
+        ]);
+
+        foreach ($this->cart as &$item) {
+            if (!isset($item['id'])) {
+                $menu = \App\Models\Menu::where('product_name', $item['name'])->first();
+    
+                if ($menu) {
+                    $item['id'] = $menu->id;
+                } else {
+                    session()->flash('error', 'Menu not found: ' . $item['name']);
+                    return;
+                }
+            }
+    
+            $order->menus()->attach($item['id'], [
+                'order_quantity' => $item['quantity'],
+                'order_price' => $item['price'],
+            ]);
+        }
+
+        session()->forget('cart');
+        $this->cart = [];
+        $this->discount = 0;
+        $this->tax = 0;
+        $this->finalPrice = 0;
+
+        session()->flash('success', 'Order has been successfully placed.');
+    }
+
 }
