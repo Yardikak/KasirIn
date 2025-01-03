@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
-            $table->string('table_name', 255)->nullable();
-            $table->integer('table_number');
-            $table->integer('table_capacity');
-            $table->integer('table_width');
-            $table->integer('table_height');
-            $table->string('table_color', 255);
-            $table->enum('table_status', ['Empty', 'Filled'])->default('Empty');
-            $table->enum('table_position', ['Inside 1', 'Inside 2', 'Outside 1', 'Outside 2']);
+            $table->string('table_name', 255)->nullable(); // Nullable as it's optional
+            $table->integer('table_number')->nullable();  // Unique constraint for table_number
+            $table->integer('table_capacity')->unsigned(); // Ensure capacity is a positive integer
+            $table->integer('table_width')->unsigned(); // Ensure width is positive
+            $table->integer('table_height')->unsigned(); // Ensure height is positive
+            $table->string('table_color', 255); 
+            $table->enum('table_status', ['Empty', 'Filled'])->default('Empty'); // Enum for table status
+            $table->enum('table_position', ['1','2','3']); // Enum for table position
             $table->timestamps();
         });
     }

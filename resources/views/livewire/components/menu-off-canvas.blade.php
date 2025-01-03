@@ -3,8 +3,13 @@
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="width: 50%">
         <div class="bg-white sticky top-0 z-10 py-4 px-4 flex justify-between items-center">
             <h5 class="text-2xl font-semibold">Data Menu</h5>
+            
             <!-- Filter Kategori -->
-            <form action="{{ route('orders.create') }}" method="GET">
+            <form action="{{ route('orders.create', ['table_id' => request('table_id'), 'table_name' => request('table_name')]) }}" method="GET">
+                <!-- Preserve table_id and table_name -->
+                <input type="hidden" name="table_id" value="{{ request('table_id') }}">
+                <input type="hidden" name="table_name" value="{{ request('table_name') }}">
+
                 <select name="category_id" class="form-select mt-1 block w-full bg-white text-gray-800 border rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" onchange="this.form.submit()">
                     <option value="">Semua Kategori</option>
                     @foreach ($categories as $category)
@@ -12,8 +17,13 @@
                     @endforeach
                 </select>
             </form>
+            
             <!-- Pencarian Menu -->
-            <form action="{{ route('orders.create') }}" method="GET" class="flex items-center space-x-2">
+            <form action="{{ route('orders.create', ['table_id' => request('table_id'), 'table_name' => request('table_name')]) }}" method="GET" class="flex items-center space-x-2">
+                <!-- Preserve table_id and table_name -->
+                <input type="hidden" name="table_id" value="{{ request('table_id') }}">
+                <input type="hidden" name="table_name" value="{{ request('table_name') }}">
+
                 <input type="text" name="search" value="{{ request()->get('search') }}" placeholder="Cari Menu..." class="form-input block w-full bg-white border rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
                 <button type="submit" class="bg-blue-500 text-white rounded-lg px-4 py-2 flex items-center justify-center">
                     <i class="bx bx-search"></i>

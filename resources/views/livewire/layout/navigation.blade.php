@@ -55,7 +55,7 @@ new class extends Component
                     {{ __('Customer') }}
                 </x-nav-link>
 
-                <x-nav-link :href="route('customers.index')" wire:navigate :active="request()->routeIs('tables')">
+                <x-nav-link :href="route('tables.index')" wire:navigate :active="request()->routeIs('tables')">
                     <i class="bx bx-chair"></i>
                     {{ __('Table') }}
                 </x-nav-link>

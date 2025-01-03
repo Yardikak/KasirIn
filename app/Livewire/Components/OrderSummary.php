@@ -69,15 +69,20 @@ class OrderSummary extends Component
         $this->calculateFinalPrice();
 
         $orderCode = session('orderCode');
-
+        $tableId = session('tableId');
+        $table  =session('table');
         $order = \App\Models\Order::create([
             'order_code' => $orderCode,
             'total_price' => $this->finalPrice,
             'discount' => $this->discount,
             'tax' => $this->tax,
             'order_status' => 'Pending',
-            'table_id' => null,
+            'table_id' => $tableId,
             'customer_id' => null,
+        ]);
+        // dd($orderCode);
+        $table->update([
+            'table_status' => 'Filled',
         ]);
 
         foreach ($this->cart as &$item) {
@@ -107,8 +112,12 @@ class OrderSummary extends Component
                 'order_price' => $item['price'],
             ]);
         }
+        
 
         session()->forget('cart');
+        session()->forget('orderCode');
+        session()->forget('tableId');
+        session()->forget('tableName');
         $this->cart = [];
         session()->flash('success', 'Order has been successfully placed.');
         return redirect()->route('orders.index');

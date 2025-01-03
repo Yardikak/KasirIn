@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class TableController extends Controller
@@ -13,10 +12,19 @@ class TableController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $tables = Table::latest()->paginate(5);
-        return view('tables.index', compact('tables'));
+        // Check if the position filter is provided
+        $position = $request->get('position');
+
+        // Fetch all tables or filter by the provided position
+        if ($position) {
+            $tables = Table::where('table_position', $position)->paginate(10); // Pagination for filtered tables
+        } else {
+            $tables = Table::paginate(10); // Fetch all tables
+        }
+
+        return view('tables.index', compact('tables', 'position'));
     }
 
     /**
@@ -24,29 +32,47 @@ class TableController extends Controller
      */
     public function create(): View
     {
-        return view('tables.create');
+        // Get the last table's ID
+        $lastTable = Table::latest('id')->first();
+        $nextId = $lastTable ? $lastTable->id + 1 : 1; // Increment the ID or start at 1 if no tables exist
+
+        // Generate the next table_name and table_number
+        $nextTableName = "Table $nextId";
+        $nextTableNumber = $nextId;
+
+        // Pass the generated values to the view
+        return view('tables.create', compact('nextTableName', 'nextTableNumber'));
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request): RedirectResponse
-    {
-        $validated = $request->validate([
-            'tableName'     => 'required|string|max:100',
-            'tableCapacity' => 'required|integer',
-            'tableWidth'    => 'required|integer',
-            'tableHeight'   => 'required|integer',
-            'tableType'     => 'required|in:Persegi Panjang,Persegi,Lingkaran',
-            'tableColor'    => 'required|string|max:100',
-            'tableStatus'   => 'required|in:Empty,Filled',
-            'tableFloor'    => 'required|in:1,2,3',
-        ]);
+{
+    // Validate the fields except table_name and table_number (they will be auto-generated)
+    $validated = $request->validate([
+        'table_capacity' => 'required|integer',
+        'table_width'    => 'required|integer',
+        'table_height'   => 'required|integer',
+        'table_color'    => 'required|string|max:100',
+        'table_status'   => 'required|in:Empty,Filled',
+        'table_position' => 'required|in:1,2,3',
+    ]);
 
-        Table::create($validated);
+    // Get the next table ID
+    $lastTable = Table::latest('id')->first(); // Get the last inserted table
+    $nextId = $lastTable ? $lastTable->id + 1 : 1; // Increment the ID or start at 1 if no tables exist
 
-        return redirect()->route('tables.index')->with('success', 'Data berhasil Disimpan!');
-    }
+    // Auto-generate table_name and table_number
+    $validated['table_name'] = "Table $nextId";
+    $validated['table_number'] = $nextId;
+
+    // Create a new table with the validated data
+    Table::create($validated);
+
+    return redirect()->route('tables.index')->with('success', 'Table created successfully!');
+}
 
     /**
      * Display the specified resource.
@@ -69,17 +95,18 @@ class TableController extends Controller
      */
     public function update(Request $request, Table $table): RedirectResponse
     {
+        // Adjusted the field names to match the migration and model
         $validated = $request->validate([
-            'tableName'     => 'required|string|max:100',
-            'tableCapacity' => 'required|integer',
-            'tableWidth'    => 'required|integer',
-            'tableHeight'   => 'required|integer',
-            'tableType'     => 'required|in:Persegi Panjang,Persegi,Lingkaran',
-            'tableColor'    => 'required|string|max:100',
-            'tableStatus'   => 'required|in:Empty,Filled',
-            'tableFloor'    => 'required|in:1,2,3',
+            'table_name'     => 'required|string|max:100',
+            'table_capacity' => 'required|integer',
+            'table_width'    => 'required|integer',
+            'table_height'   => 'required|integer',
+            'table_color'    => 'required|string|max:100',
+            'table_status'   => 'required|in:Empty,Filled',
+            'table_position'    => 'required|in:1,2,3',
         ]);
 
+        // Update the table with the validated data
         $table->update($validated);
 
         return redirect()->route('tables.index')->with('success', 'Data Berhasil Diperbarui!');
@@ -94,4 +121,11 @@ class TableController extends Controller
 
         return redirect()->route('tables.index')->with('success', 'Meja Berhasil Dihapus!');
     }
+
+    public function filterByPosition($position)
+    {
+        $tables = Table::where('table_position', $position)->paginate(10); // Paginate the filtered data
+        return view('tables.index', compact('tables', 'position'));
+    }
+
 }
