@@ -16,22 +16,23 @@ class OrderSummary extends Component
 
     public function mount()
     {
-        $this->cart = session()->get('cart', []);
+        $this->updateCart();
         $this->calculateFinalPrice();
     }
 
     public function render()
     {
-        return view('livewire.components.order-summary', [
-            'finalPrice' => $this->finalPrice,
-            'cart' => $this->cart
-        ]);
-    }
+        $this->updateCart();
 
+        return view('livewire.components.order-summary');
+    }
+    
     public function updateCart()
     {
         $this->cart = session()->get('cart', []);
-        $this->calculateFinalPrice();
+        if (empty($this->cart)) {
+            $this->cart = [];
+        }
     }
 
     public function updated($propertyName)
@@ -88,14 +89,24 @@ class OrderSummary extends Component
             if (!isset($item['id'])) {
                 $menu = \App\Models\Menu::where('product_name', $item['name'])->first();
     
-                if ($menu) {
-                    $item['id'] = $menu->id;
-                } else {
+                if (!$menu) {
                     session()->flash('error', 'Menu not found: ' . $item['name']);
                     return;
                 }
-            }
     
+                $item['id'] = $menu->id;
+            }
+        
+            // Validasi dan kurangi stok
+            $menu = \App\Models\Menu::find($item['id']);
+            if ($menu->product_quantity < $item['quantity']) {
+                session()->flash('error', 'Insufficient stock for menu: ' . $menu->product_name);
+                return;
+            }
+            $menu->product_quantity -= $item['quantity'];
+            $menu->save();
+
+            // Tambahkan menu ke order
             $order->menus()->attach($item['id'], [
                 'order_quantity' => $item['quantity'],
                 'order_price' => $item['price'],
@@ -108,11 +119,8 @@ class OrderSummary extends Component
         session()->forget('tableId');
         session()->forget('tableName');
         $this->cart = [];
-        $this->discount = 0;
-        $this->tax = 0;
-        $this->finalPrice = 0;
-
         session()->flash('success', 'Order has been successfully placed.');
+        return redirect()->route('orders.index');
     }
 
 }

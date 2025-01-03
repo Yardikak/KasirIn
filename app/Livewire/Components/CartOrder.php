@@ -8,16 +8,21 @@ class CartOrder extends Component
 {
     public $cart = [];
 
-    protected $listeners = ['cartUpdated' => '$refresh'];
+    protected $listeners = ['cartUpdated' => 'updateCart'];
 
     public function mount()
     {
-        $this->cart = session()->get('cart', []);
+        $this->updateCart();
     }
 
     public function render()
     {
         return view('livewire.components.cart-order');
+    }
+
+    public function updateCart()
+    {
+        $this->cart = session()->get('cart', []);
     }
 
     public function removeFromCart($id)
@@ -27,7 +32,6 @@ class CartOrder extends Component
         }
 
         session()->put('cart', $this->cart);
-
         $this->dispatch('cartUpdated');
     }
 

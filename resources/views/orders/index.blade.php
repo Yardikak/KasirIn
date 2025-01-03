@@ -65,7 +65,23 @@
                 </form>
             </div>
         </div>
-
+        <!-- Pesan Konfirmasi -->
+        @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show fixed-top right-10 mr-5 mt-5" role="alert">
+            <div class="d-flex align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v3H6a1 1 0 100 2h3v3a1 1 0 102 0v-3h3a1 1 0 100-2h-3V6z" clip-rule="evenodd" />
+                </svg>
+                <div class="flex-1 ml-3">
+                    <h5 class="alert-heading text-lg font-semibold">{{ session('success') }}</h5>
+                    <p class="mb-0">Pesanan Anda berhasil dibuat dan akan segera diproses. Terima kasih!</p>
+                </div>
+                <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        @endif
         <!-- Daftar Menu (Sebelah Kanan) -->
         @livewire('components.menu-off-canvas')
     </div>
