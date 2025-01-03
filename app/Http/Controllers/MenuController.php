@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Menu;
 use App\Models\Category;
 use App\Models\Additional;
+use App\Models\Order;
+use Phpml\Classification\KNearestNeighbors;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -139,4 +141,69 @@ class MenuController extends Controller
 
         return redirect()->route('menus.index')->with('success', 'Data berhasil Dihapus!');
     }
+
+    public function getFavoriteMenus()
+    {
+        $orders = Order::with('menus')->get();
+
+        $menuData = [];
+
+        foreach ($orders as $order) {
+            foreach ($order->menus as $menu) {
+                $menuId = $menu->id;
+
+                if (!isset($menuData[$menuId])) {
+                    $menuData[$menuId] = [
+                        'total_quantity' => 0,
+                        'total_price' => 0,
+                        'menu' => $menu->product_name,
+                        'menu_image' => $menu->product_image
+                    ];
+                }
+
+                $pivot = $order->menus->find($menuId)->pivot;
+                $orderQuantity = $pivot->order_quantity;
+                $orderPrice = $pivot->order_price;
+
+                $menuData[$menuId]['total_quantity'] += $orderQuantity;
+                $menuData[$menuId]['total_price'] += $orderPrice;
+            }
+        }
+
+        $features = [];
+        $labels = [];
+
+        foreach ($menuData as $menuId => $data) {
+            $features[] = [$data['total_quantity'], $data['total_price']];
+            $labels[] = $menuId;
+        }
+
+        $knn = new KNearestNeighbors();
+        $knn->train($features, $labels);
+
+        // Buat prediksi untuk setiap menu
+        $predictions = [];
+
+        foreach ($menuData as $menuId => $data) {
+            // Prediksi untuk masing-masing menu berdasarkan fitur
+            $prediction = $knn->predict([[$data['total_quantity'], $data['total_price']]]);
+            
+            $predictions[] = [
+                'menu' => $data['menu'],
+                'menu_image' => $data['menu_image'],
+                'total_quantity' => $data['total_quantity'],
+                'total_price' => $data['total_price'],
+                'predicted_menu_id' => $prediction[0],
+            ];
+        }
+
+        usort($predictions, function ($a, $b) {
+            return $b['total_quantity'] <=> $a['total_quantity'];
+        });
+
+        $top5Menus = array_slice($predictions, 0, 5);
+        // dd($top5Menus);
+        return view('dashboard', compact('top5Menus'));
+    }
+
 }

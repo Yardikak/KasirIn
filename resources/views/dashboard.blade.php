@@ -376,121 +376,53 @@
                 </div>
                 <!--/ Expense Overview -->
 
-                    <!-- Transactions -->
-                    <div class="col-md-6 col-lg-4 order-2 mb-4">
-                        <div class="card h-100">
-                            <div class="card-header d-flex align-items-center justify-content-between">
-                                <h5 class="card-title m-0 me-2">Transaksi</h5>
-                                <div class="dropdown">
-                                    <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
-                                        <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
-                                    </div>
+                <!-- Favorite Menus -->
+                <div class="col-md-6 col-lg-4 order-2 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <h5 class="card-title m-0 me-2">Favorite Menu</h5>
+                            <div class="dropdown">
+                                <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                                    <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
+                                    <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
+                                    <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <ul class="p-0 m-0">
+                        </div>
+                        <div class="card-body">
+                            <ul class="p-0 m-0">
+                                @foreach($top5Menus as $index => $menu)
                                     <li class="d-flex mb-4 pb-1">
                                         <div class="avatar flex-shrink-0 me-3">
-                                            <img src="{{ asset('assets\theme\img\icons\unicons\paypal.png') }}" alt="User" class="rounded" />
+                                            <!-- Ganti dengan gambar menu sesuai data -->
+                                            <img src="{{ asset('storage/menu_images/'.$menu['menu_image']) }}" alt="Menu" class="rounded" />
                                         </div>
                                         <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                             <div class="me-2">
-                                                <small class="text-muted d-block mb-1">Paypal</small>
-                                                <h6 class="mb-0">Send money</h6>
-                                            </div>
-                                                <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">+82.6</h6>
-                                                <span class="text-muted">USD</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex mb-4 pb-1">
-                                    <div class="avatar flex-shrink-0 me-3">
-                                        <img src="{{ asset('assets\theme\img\icons\unicons\wallet.png') }}" alt="User" class="rounded" />
-                                        
-                                    </div>
-                                    <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                        <div class="me-2">
-                                        <small class="text-muted d-block mb-1">Wallet</small>
-                                        <h6 class="mb-0">Mac'D</h6>
-                                        </div>
-                                        <div class="user-progress d-flex align-items-center gap-1">
-                                        <h6 class="mb-0">+270.69</h6>
-                                        <span class="text-muted">USD</span>
-                                        </div>
-                                    </div>
-                                    </li>
-                                    <li class="d-flex mb-4 pb-1">
-                                        <div class="avatar flex-shrink-0 me-3">
-                                            <img src="{{ asset('assets\theme\img\icons\unicons\chart.png') }}" alt="User" class="rounded" />
-                                        </div>
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                            <div class="me-2">
-                                                <small class="text-muted d-block mb-1">Transfer</small>
-                                                <h6 class="mb-0">Refund</h6>
-                                            </div>
-                                                <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">+637.91</h6>
-                                                <span class="text-muted">USD</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex mb-4 pb-1">
-                                    <div class="avatar flex-shrink-0 me-3">
-                                        <img src="{{ asset('assets\theme\img\icons\unicons\cc-success.png') }}" alt="User" class="rounded" />
-                                        
-                                    </div>
-                                    <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                        <div class="me-2">
-                                            <small class="text-muted d-block mb-1">Credit Card</small>
-                                            <h6 class="mb-0">Ordered Food</h6>
-                                        </div>
-                                        <div class="user-progress d-flex align-items-center gap-1">
-                                            <h6 class="mb-0">-838.71</h6>
-                                            <span class="text-muted">USD</span>
-                                        </div>
-                                    </div>
-                                    </li>
-                                    <li class="d-flex mb-4 pb-1">
-                                        <div class="avatar flex-shrink-0 me-3">
-                                            <img src="{{ asset('assets\theme\img\icons\unicons\wallet.png') }}" alt="User" class="rounded" />
-                                        </div>
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                            <div class="me-2">
-                                                <small class="text-muted d-block mb-1">Wallet</small>
-                                                <h6 class="mb-0">Starbucks</h6>
+                                                <small class="text-muted d-block mb-1">Menu {{ $index + 1 }}</small>
+                                                <h6 class="mb-0">{{ $menu['menu'] }}</h6>
                                             </div>
                                             <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">+203.33</h6>
-                                                <span class="text-muted">USD</span>
+                                                <h6 class="mb-0">{{ $menu['total_quantity'] }}</h6>
+                                                <span class="text-muted">Ordered</span>
+                                            </div>
+                                            <div class="user-progress d-flex align-items-center gap-1">
+                                                <h6 class="mb-0">{{ number_format($menu['total_price'], 2) }}</h6>
+                                                <span class="text-muted">Total Revenue</span>
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="d-flex">
-                                        <div class="avatar flex-shrink-0 me-3">
-                                            <img src="{{ asset('assets\theme\img\icons\unicons\cc-warning.png') }}" alt="User" class="rounded" /> 
-                                        </div>
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                            <div class="me-2">
-                                                <small class="text-muted d-block mb-1">Mastercard</small>
-                                                <h6 class="mb-0">Ordered Food</h6>
-                                            </div>
-                                                <div class="user-progress d-flex align-items-center gap-1">
-                                                <h6 class="mb-0">-92.45</h6>
-                                                <span class="text-muted">USD</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                                @endforeach
+                            </ul>
+                            
                         </div>
                     </div>
-                <!--/ Transactions -->
+                </div>
+                <!--/ Favorite Menus -->
+
                 </div>
             </div>
             <!-- / Content -->
