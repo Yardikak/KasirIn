@@ -13,6 +13,7 @@ class OrderController extends Controller
 {
     public function index(Request $request): View
     {
+        session(['cart' => null]);
         $orderCode = 'ORD' . date('dmY') . '-' . strtoupper(substr(uniqid(), -5));
         $tableId =  $request->query('table_id');
         $tableName = $request->query('table_name');
