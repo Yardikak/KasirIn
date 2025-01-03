@@ -14,14 +14,39 @@ class OrderController extends Controller
     public function index(Request $request): View
     {
         $orderCode = 'ORD' . date('dmY') . '-' . strtoupper(substr(uniqid(), -5));
-        session(['orderCode' => $orderCode]);
-        return view('orders.index', compact('orderCode'));
+        $tableId =  $request->query('table_id');
+        $tableName = $request->query('table_name');
+        $table = null;
+        if ($tableId) {
+            $table = \App\Models\Table::find($tableId);
+        }
+        session(['tableId' => $tableId, 'tableName' => $tableName, 'orderCode' => $orderCode, 'table' => $table]);
+        // Debugging
+        \Log::info('Session Data in indexe:', [
+            'tableId' => session('tableId'),
+            'tableName' => session('tableName'),
+            'orderCode' => session('orderCode'),
+        ]);
+        return view('orders.index', compact('tableId', 'tableName', 'orderCode','table'));
     }
 
     public function create(Request $request)
     {
-        $orderCode = session('orderCode');
-        return view('orders.index', compact('orderCode'));
+        \Log::info('Session Data in Create:', [
+            'tableId' => session('tableId'),
+            'tableName' => session('tableName'),
+            'orderCode' => session('orderCode'),
+        ]);
+         // Get the table ID and table name from the query parameters
+         $orderCode = session('orderCode');
+         $tableName = session('tableName'); // Default to null if not provided
+         $tableId = session('tableId'); // Default to null if not provided
+         $table=session('table');
+         if ($tableId==null) {
+             return view('orders.index', compact('orderCode'));
+         }else{
+             return view('orders.index', compact('tableId', 'tableName', 'orderCode','table'));
+         }
     }
 
     public function searchCustomer(Request $request)

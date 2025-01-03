@@ -16,7 +16,9 @@
                 <!-- Table Name -->
                 <div class="mb-4 flex flex-col items-center">
                     <label class="block font-semibold text-gray-800 mb-1">Table Name :</label>
-                    <input type="text" readonly class="form-input border rounded bg-gray-200 text-gray-800 w-48">
+                    @if (session('tableName'))
+                        <input type="text" value="{{ $tableName }}" readonly class="form-input border rounded bg-gray-200 text-gray-800 w-48">
+                    @endif
                 </div>
             </div>
 

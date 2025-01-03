@@ -8,6 +8,7 @@ use App\Http\Controllers\AdditionalController;
 use App\Http\Controllers\VariantController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\TableController;
 use App\Http\Controllers\Auth\SocialiteController;
 
 Route::view('/', 'welcome');
@@ -36,7 +37,20 @@ Route::get('/auth/{provider}/callback', [SocialiteController::class, 'callback']
     Route::middleware('auth')->resource('/additionals', AdditionalController::class);
     Route::middleware('auth')->resource('/variants', VariantController::class);
     Route::middleware('auth')->resource('/customers', CustomerController::class);
-
+    Route::middleware('auth')->resource('/tables', \App\Http\Controllers\TableController::class);
+    
+    Route::middleware('auth')->group(function () {
+        Route::get('/tables', [TableController::class, 'index'])->name('tables.index');
+        Route::get('/tables/create', [TableController::class, 'create'])->name('tables.create');
+        Route::post('/', [TableController::class, 'store'])->name('tables.store');
+        Route::get('/tables/{table}/edit', [TableController::class, 'edit'])->name('tables.edit');
+        Route::put('/tables/{table}', [TableController::class, 'update'])->name('tables.update');
+        Route::delete('/tables/{table}', [TableController::class, 'destroy'])->name('tables.destroy');
+        Route::get('/tables/position/{position}', [TableController::class, 'filterByPosition'])->name('tables.filterByPosition');
+        Route::get('/tables/{table}', [TableController::class, 'show'])->name('tables.show');
+    });
+    
+    
     Route::middleware('auth')->group(function () {
         Route::resource('category_menus', CategoryMenuController::class)->except(['show']);
         Route::get('category_menus/{category}/show', [CategoryMenuController::class, 'show'])->name('category_menus.show');
